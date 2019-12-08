@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Cosmos
+import TinyConstraints
 
 class BathroomTableViewCell: UITableViewCell {
     
@@ -15,6 +17,11 @@ class BathroomTableViewCell: UITableViewCell {
     var ratingLabel: UILabel!
     var albumArt: UIImageView!
     var arrowImageView: UIImageView!
+    lazy var cosmosView: CosmosView = {
+        var view = CosmosView()
+        view.settings.updateOnTouch = false
+        return view
+    }()
     
     let padding: CGFloat = 9
     let leadPadding: CGFloat = 120
@@ -40,11 +47,8 @@ class BathroomTableViewCell: UITableViewCell {
         locationLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(locationLabel)
         
-        ratingLabel = UILabel()
-        ratingLabel.font = UIFont.systemFont(ofSize: 14)
-        ratingLabel.textColor = .darkGray
-        ratingLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(ratingLabel)
+        cosmosView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(cosmosView)
         
         albumArt = UIImageView()
         albumArt.translatesAutoresizingMaskIntoConstraints = false
@@ -74,9 +78,9 @@ class BathroomTableViewCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            ratingLabel.leadingAnchor.constraint(equalTo: bathroomLabel.leadingAnchor),
-            ratingLabel.heightAnchor.constraint(equalToConstant: labelHeight2),
-            ratingLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: spacing2)
+            cosmosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: leadPadding),
+            //cosmosView.heightAnchor.constraint(equalToConstant: labelHeight2),
+            cosmosView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -97,7 +101,7 @@ class BathroomTableViewCell: UITableViewCell {
     func configure(for bathroom: Bathroom) {
         bathroomLabel.text = bathroom.name
         locationLabel.text = bathroom.location
-        ratingLabel.text = bathroom.rating
+        cosmosView.rating = bathroom.rating
         albumArt.image = bathroom.image
     }
     

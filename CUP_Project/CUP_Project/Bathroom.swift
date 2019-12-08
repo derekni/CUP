@@ -12,14 +12,14 @@ import UIKit
 class Bathroom {
     var name: String
     var location: String
-    var rating: String
+    var rating: Double
     var displayPicName: String
     var image: UIImage!
     
-    init(name: String, location: String, rating: String, image: String) {
+    init(name: String, location: String, image: String) {
         self.name = name
         self.location = location
-        self.rating = rating
+        self.rating = 0.0
         self.displayPicName = image
         self.image = UIImage(named: image)
     }
@@ -30,7 +30,7 @@ class Bathroom {
     func setLocation(to location: String) {
         self.location = location
     }
-    func setRating(to rating: String) {
+    func setRating(to rating: Double) {
         self.rating = rating
     }
 }

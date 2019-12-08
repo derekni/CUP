@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Cosmos
 
 class DetailViewController: UIViewController {
 
@@ -16,7 +17,10 @@ class DetailViewController: UIViewController {
     var locationField: UITextField!
     var locationLabel: UILabel!
     
-    var ratingField: UITextField!
+    lazy var ratingField: CosmosView = {
+        var view = CosmosView()
+        return view
+    }()
     var ratingLabel: UILabel!
     
     var textFieldText: String
@@ -70,14 +74,8 @@ class DetailViewController: UIViewController {
         locationLabel.text = "Location:"
         view.addSubview(locationLabel)
         
-        ratingField = UITextField()
         ratingField.translatesAutoresizingMaskIntoConstraints = false
-        ratingField.text = ""
-        ratingField.textColor = .darkGray
-        ratingField.borderStyle = .roundedRect
-        ratingField.backgroundColor = .white
-        ratingField.textAlignment = .left
-        ratingField.clearsOnBeginEditing = true
+        ratingField.rating = 0
         view.addSubview(ratingField)
         
         ratingLabel = UILabel()
@@ -99,9 +97,7 @@ class DetailViewController: UIViewController {
         if (bathroomField.text != "") {
             delegate?.changeBathroomNameText(to: bathroomField.text!)
         }
-        if(ratingField.text != "") {
-            delegate?.changeRatingText(to: ratingField.text!)
-        }
+        delegate?.changeRating(to: ratingField.rating)
         navigationController?.popViewController(animated: true)
     }
 

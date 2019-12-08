@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import Cosmos
+import TinyConstraints
 
 protocol ChangeDelegate: class {
     func changeBathroomNameText(to bathroomNameString: String)
     func changeLocationText(to locationString: String)
-    func changeRatingText(to ratingString: String)
+    func changeRating(to newRating: Double)
 }
 
 class ViewController: UIViewController {
+    
+    
 
     var tableView: UITableView!
     var arr = [UIView]()
@@ -30,7 +34,7 @@ class ViewController: UIViewController {
         title = "CUP: Bathroom Locator"
         view.backgroundColor = .white
         
-        let appelSecondFloor = Bathroom(name: "Appel (Second Floor)", location: "Appel Commons", rating: "2.5/5", image: "insert image name here")
+        let appelSecondFloor = Bathroom(name: "Appel (Second Floor)", location: "Appel Commons", image: "insert image name here")
         
         list = [appelSecondFloor]
 
@@ -41,6 +45,9 @@ class ViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(BathroomTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         view.addSubview(tableView)
+        
+        
+        
 
         setupConstraints()
     }
@@ -93,6 +100,7 @@ extension ViewController: UITableViewDelegate {
 }
 
 extension ViewController: ChangeDelegate {
+    
     func changeBathroomNameText(to bathroomNameString: String) {
         let bathroom = list[path!.row]
         let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
@@ -107,10 +115,10 @@ extension ViewController: ChangeDelegate {
         cell!.configure(for: bathroom)
     }
     
-    func changeRatingText(to ratingString: String) {
+    func changeRating(to newRating: Double) {
         let bathroom = list[path!.row]
         let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
-        bathroom.setRating(to: ratingString)
+        bathroom.setRating(to: newRating)
         cell!.configure(for: bathroom)
     }
     
