@@ -1,1 +1,2 @@
 # CUP
+CUP seeks to streamline the bathroom search process through an innovative app that combines mapping, crowd-sourcing, and rating systems to assist Cornell students in locating the most appealing and convenient bathroom, as rated by their peers. To accomplish this purpose, our app features a TableView that features the various bathrooms and their ratings, a map that assists in the visual location of bathrooms, and a crowd-sourced new-bathroom locating feature that enables users to contribute to our bathroom database.
