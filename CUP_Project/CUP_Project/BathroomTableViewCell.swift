@@ -21,8 +21,9 @@ class BathroomTableViewCell: UITableViewCell {
     }()
     
     let padding: CGFloat = 9
-    let leadPadding: CGFloat = 120
-    let leadPaddingImage: CGFloat = 20
+    //let leadPadding: CGFloat = 120
+    let leadPadding: CGFloat = 20
+    //let leadPaddingImage: CGFloat = 20
     let spacing: CGFloat = 3
     let spacing2: CGFloat = 1
     let labelHeight: CGFloat = 35
