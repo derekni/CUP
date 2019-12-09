@@ -12,9 +12,7 @@ import Alamofire
 import SwiftyJSON
 
 protocol ChangeDelegate: class {
-    func changeBathroomNameText(to bathroomNameString: String)
-    func changeLocationText(to locationString: String)
-    func changeRating(to newRating: Double)
+    func changeAvgRating(to ratingFloat: Float)
 }
 
 class ViewController: UIViewController {
@@ -95,35 +93,44 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         path = indexPath
+        let viewController = DetailViewController(textFieldText: "text")
+        viewController.delegate = self
+        navigationController?.pushViewController(viewController, animated: true)
     }
         
-    let viewController = DetailViewController(textFieldText: "text")
-    viewController.delegate = self
-    navigationController?.pushViewController(viewController, animated: true)
+
+}
+
+extension ViewController: ChangeDelegate {
+    func changeAvgRating(to ratingFloat: Float) {
+        let bathroom = bathrooms[path!.row]
+        NetworkManager.changeAvgRating(rating: ratingFloat, bathroomID: bathroom.id)
+        
+    }
 }
 
 
 //extension ViewController: ChangeDelegate {
 //
-////    func changeBathroomNameText(to bathroomNameString: String) {
-////        let bathroom = list[path!.row]
-////        let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
-////        bathroom.setBathroomName(to: bathroomNameString)
-////        cell!.configure(for: bathroom)
-////    }
-////
-////    func changeLocationText (to locationString: String) {
-////        let bathroom = list[path!.row]
-////        let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
-////        bathroom.setLocation(to: locationString)
-////        cell!.configure(for: bathroom)
-////    }
-////
-////    func changeRating(to newRating: Double) {
-////        let bathroom = list[path!.row]
-////        let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
-////        bathroom.setRating(to: newRating)
-////        cell!.configure(for: bathroom)
-////    }
+//    func changeBathroomNameText(to bathroomNameString: String) {
+//        let bathroom = bathrooms[path!.row]
+//        let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
+//        bathroom.setBathroomName(to: bathroomNameString)
+//        cell!.configure(for: bathroom)
+//    }
 //
+//    func changeLocationText (to locationString: String) {
+//        let bathroom = bathrooms[path!.row]
+//        let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
+//        bathroom.setLocation(to: locationString)
+//        cell!.configure(for: bathroom)
+//    }
+//
+//    func changeRating(to newRating: Double) {
+//        let bathroom = bathrooms[path!.row]
+//        let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
+//        bathroom.setRating(to: newRating)
+//        cell!.configure(for: bathroom)
+//    }
+
 //}

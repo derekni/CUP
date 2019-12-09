@@ -14,8 +14,10 @@
             filePath = "CUP_Project/BathroomTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86">
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "init(coder:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "F3E84BA9-CC27-4458-ABC4-5D226C9B95CE - f6aefb64d5fc9561"
