@@ -35,8 +35,8 @@ def create_bathroom():
         description=post_body.get('description'),
         #latitude=post_body.get('latitude'),
         #longitude=post_body.get('longitude'),
-        avgRating=post_body.get('avgRating'),
-        numRatings=post_body.get('numRatings')
+        #avgRating=post_body.get('avgRating'),
+        #numRatings=post_body.get('numRatings')
     )
     db.session.add(bathroom)
     db.session.commit()
@@ -59,8 +59,10 @@ def update_bathroom(bathroom_id):
     bathroom.description = post_body.get('description', bathroom.description)
     #bathroom.latitude = post_body.get('latitude', bathroom.latitude)
     #bathroom.longitude = post_body.get('longitude', bathroom.longitude)
-    bathroom.avgRating = post_body.get('avgRating', bathroom.avgRating)
-    bathroom.numRatings = post_body.get('numRatings', bathroom.numRatings)
+    rating = post_body.get('rating', 3)
+    bathroom.updateAvgRating(rating)
+    #bathroom.avgRating = post_body.get('avgRating', bathroom.avgRating)
+    #bathroom.numRatings = post_body.get('numRatings', bathroom.numRatings)
     db.session.commit()
     return json.dumps({'success': True, 'data': bathroom.serialize()}), 200
 

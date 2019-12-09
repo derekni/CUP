@@ -9,16 +9,16 @@ class Bathroom(db.Model):
     description = db.Column(db.String, nullable=False)
     #latitude = db.Column(db.Float, nullable=False)
     #longitude = db.Column(db.Float, nullable=False)
-    avgRating = db.Column(db.String, nullable=False)
-    numRatings = db.Column(db.String, nullable=False)
+    avgRating = db.Column(db.Float, nullable=False)
+    numRatings = db.Column(db.Integer, nullable=False)
 
     def __init__(self, **kwargs):
         self.name = kwargs.get('name', '')
         self.description = kwargs.get('description', '')
         #self.latitude = kwargs.get('latitude', '')
         #self.longitude = kwargs.get('longitude', '')
-        self.avgRating = kwargs.get('avgRating', '')
-        self.numRatings = kwargs.get('numRatings', '')
+        self.avgRating = 0.0
+        self.numRatings = 0
     
     def serialize(self):
         return {
@@ -31,6 +31,6 @@ class Bathroom(db.Model):
             'numRatings': self.numRatings
         }
     
-    def updateAvgRating(self, avgRating, numRatings, newRating):
-        self.avgRating = (avgRating * numRatings + newRating) / (numRatings + 1)
+    def updateAvgRating(self, newRating):
+        self.avgRating = (self.avgRating * self.numRatings + newRating) / (self.numRatings + 1)
         self.numRatings += 1
