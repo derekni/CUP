@@ -13,6 +13,8 @@ import SwiftyJSON
 
 protocol ChangeDelegate: class {
     func changeAvgRating(to ratingFloat: Float)
+    func getName() -> String
+    func getDescription() -> String
 }
 
 class ViewController: UIViewController {
@@ -115,6 +117,14 @@ extension ViewController: ChangeDelegate {
         let bathroom = bathrooms[path!.row]
         NetworkManager.changeAvgRating(rating: ratingFloat, bathroomID: bathroom.id)
         
+    }
+    func getName() -> String {
+        let bathroom = bathrooms[path!.row]
+        return bathroom.name
+    }
+    func getDescription() -> String {
+        let bathroom = bathrooms[path!.row]
+        return bathroom.description
     }
 }
 

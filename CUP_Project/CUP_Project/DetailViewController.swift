@@ -11,10 +11,10 @@ import Cosmos
 import Alamofire
 
 class DetailViewController: UIViewController {
-
+    
     var bathroomLabel: UILabel!
     
-    var locationLabel: UILabel!
+    var descriptionLabel: UILabel!
     
     lazy var ratingField: CosmosView = {
         var view = CosmosView()
@@ -43,35 +43,37 @@ class DetailViewController: UIViewController {
         title = "Edit Details"
         view.backgroundColor = .white
         
-//        bathroomField = UITextField()
-//        bathroomField.translatesAutoresizingMaskIntoConstraints = false
-//        bathroomField.text = ""
-//        bathroomField.textColor = .darkGray
-//        bathroomField.borderStyle = .roundedRect
-//        bathroomField.backgroundColor = .white
-//        bathroomField.textAlignment = .left
-//        bathroomField.clearsOnBeginEditing = true
-//        view.addSubview(bathroomField)
+        //        bathroomField = UITextField()
+        //        bathroomField.translatesAutoresizingMaskIntoConstraints = false
+        //        bathroomField.text = ""
+        //        bathroomField.textColor = .darkGray
+        //        bathroomField.borderStyle = .roundedRect
+        //        bathroomField.backgroundColor = .white
+        //        bathroomField.textAlignment = .left
+        //        bathroomField.clearsOnBeginEditing = true
+        //        view.addSubview(bathroomField)
         
         bathroomLabel = UILabel()
         bathroomLabel.translatesAutoresizingMaskIntoConstraints = false
-        bathroomLabel.text = "Bathroom Name:"
+        bathroomLabel.font = UIFont.systemFont(ofSize: 32)
+        bathroomLabel.text = delegate?.getName()
         view.addSubview(bathroomLabel)
-    
-//        locationField = UITextField()
-//        locationField.translatesAutoresizingMaskIntoConstraints = false
-//        locationField.text = ""
-//        locationField.textColor = .darkGray
-//        locationField.borderStyle = .roundedRect
-//        locationField.backgroundColor = .white
-//        locationField.textAlignment = .left
-//        locationField.clearsOnBeginEditing = true
-//        view.addSubview(locationField)
         
-        locationLabel = UILabel()
-        locationLabel.translatesAutoresizingMaskIntoConstraints = false
-        locationLabel.text = "Location:"
-        view.addSubview(locationLabel)
+        //        locationField = UITextField()
+        //        locationField.translatesAutoresizingMaskIntoConstraints = false
+        //        locationField.text = ""
+        //        locationField.textColor = .darkGray
+        //        locationField.borderStyle = .roundedRect
+        //        locationField.backgroundColor = .white
+        //        locationField.textAlignment = .left
+        //        locationField.clearsOnBeginEditing = true
+        //        view.addSubview(locationField)
+        
+        descriptionLabel = UILabel()
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.text = delegate?.getDescription()
+        view.addSubview(descriptionLabel)
         
         ratingField.translatesAutoresizingMaskIntoConstraints = false
         ratingField.rating = 0
@@ -80,6 +82,7 @@ class DetailViewController: UIViewController {
         ratingLabel = UILabel()
         ratingLabel.translatesAutoresizingMaskIntoConstraints = false
         ratingLabel.text = "Rating:"
+        ratingLabel.textColor = .orange
         view.addSubview(ratingLabel)
         
         saveButton = UIBarButtonItem()
@@ -90,59 +93,55 @@ class DetailViewController: UIViewController {
     }
     
     @objc func saveTapped() {
-//        if (locationField.text != "") {
-//            delegate?.changeLocationText(to: locationField.text!)
-//        }
-//        if (bathroomField.text != "") {
-//            delegate?.changeBathroomNameText(to: bathroomField.text!)
-//        }
+        //        if (locationField.text != "") {
+        //            delegate?.changeLocationText(to: locationField.text!)
+        //        }
+        //        if (bathroomField.text != "") {
+        //            delegate?.changeBathroomNameText(to: bathroomField.text!)
+        //        }
         delegate?.changeAvgRating(to: Float(ratingField.rating))
         navigationController?.popViewController(animated: true)
     }
-
+    
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
             bathroomLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
-            bathroomLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            bathroomLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            bathroomLabel.heightAnchor.constraint(equalToConstant: 24)
-        ])
-
-//        NSLayoutConstraint.activate([
-//            bathroomField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 101),
-//            bathroomField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 184),
-//            bathroomField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-//            bathroomField.heightAnchor.constraint(equalToConstant: 24)
-//        ])
+            bathroomLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            bathroomLabel.heightAnchor.constraint(equalToConstant: 45)
+            ])
+        
+        //        NSLayoutConstraint.activate([
+        //            bathroomField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 101),
+        //            bathroomField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 184),
+        //            bathroomField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+        //            bathroomField.heightAnchor.constraint(equalToConstant: 24)
+        //        ])
         
         NSLayoutConstraint.activate([
-            locationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
-            locationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            locationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            locationLabel.heightAnchor.constraint(equalToConstant: 24)
-        ])
-
-//        NSLayoutConstraint.activate([
-//            locationField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 151),
-//            locationField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 125),
-//            locationField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-//            locationField.heightAnchor.constraint(equalToConstant: 24)
-//        ])
+            descriptionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
+            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            descriptionLabel.heightAnchor.constraint(equalToConstant: 30)
+            ])
+        
+        //        NSLayoutConstraint.activate([
+        //            locationField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 151),
+        //            locationField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 125),
+        //            locationField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+        //            locationField.heightAnchor.constraint(equalToConstant: 24)
+        //        ])
         
         NSLayoutConstraint.activate([
             ratingLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200),
-            ratingLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            ratingLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            ratingLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             ratingLabel.heightAnchor.constraint(equalToConstant: 24)
-        ])
-
+            ])
+        
         NSLayoutConstraint.activate([
-            ratingField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 201),
-            ratingField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 108),
-            ratingField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            ratingField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 230),
+            ratingField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             ratingField.heightAnchor.constraint(equalToConstant: 24)
-        ])
+            ])
     }
-
+    
 }

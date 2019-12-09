@@ -16,22 +16,19 @@ class BathroomTableViewCell: UITableViewCell {
     lazy var cosmosView: CosmosView = {
         var view = CosmosView()
         view.settings.updateOnTouch = false
-        view.settings.fillMode = .precise
         return view
     }()
     
     let padding: CGFloat = 9
-    //let leadPadding: CGFloat = 120
     let leadPadding: CGFloat = 20
-    //let leadPaddingImage: CGFloat = 20
-    let spacing: CGFloat = 3
-    let spacing2: CGFloat = 1
+    let spacing: CGFloat = 2
+    let spacing2: CGFloat = 5
     let labelHeight: CGFloat = 35
     let labelHeight2: CGFloat = 20
     let albumLength: CGFloat = 80
     let albumPadding: CGFloat = 10
     let arrowImageLength: CGFloat = 15
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -42,6 +39,7 @@ class BathroomTableViewCell: UITableViewCell {
         
         descriptionLabel = UILabel()
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.textColor = .darkGray
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(descriptionLabel)
         
@@ -58,18 +56,18 @@ class BathroomTableViewCell: UITableViewCell {
             bathroomLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: leadPadding),
             bathroomLabel.heightAnchor.constraint(equalToConstant: labelHeight),
             bathroomLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding)
-        ])
+            ])
         
         NSLayoutConstraint.activate([
             descriptionLabel.leadingAnchor.constraint(equalTo: bathroomLabel.leadingAnchor),
             descriptionLabel.heightAnchor.constraint(equalToConstant: labelHeight2),
             descriptionLabel.topAnchor.constraint(equalTo: bathroomLabel.bottomAnchor, constant: spacing)
-        ])
+            ])
         
         NSLayoutConstraint.activate([
             cosmosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: leadPadding),
-            cosmosView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor)
-        ])
+            cosmosView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: spacing2)
+            ])
     }
     
     func configure(for bathroom: Bathroom) {
