@@ -24,8 +24,10 @@ def hello_world():
 @app.route('/bathrooms/')
 def get_bathrooms():
     bathrooms = Bathroom.query.all()
-    res = {'success': True, 'data': [bathroom.serialize() for bathroom in bathrooms]}
-    return json.dumps(res), 200
+    #res = {'success': True, 'data': [bathroom.serialize() for bathroom in bathrooms]}
+    res = {'bathrooms': [bathroom.serialize() for bathroom in bathrooms]}
+    #return json.dumps(res), 200
+    return json.dumps({'data': res}), 200
 
 @app.route('/bathrooms/', methods=['POST'])
 def create_bathroom():
@@ -46,8 +48,11 @@ def create_bathroom():
 def get_bathroom(bathroom_id):
     bathroom = Bathroom.query.filter_by(id=bathroom_id).first()
     if not bathroom:
-        return json.dumps({'success': False, 'error': 'Bathroom not found!'}), 404
-    return json.dumps({'success': True, 'data': bathroom.serialize()}), 200
+        #return json.dumps({'success': False, 'error': 'Bathroom not found!'}), 404
+        return json.dumps({'error': 'Bathroom not found!'}), 404
+    #return json.dumps({'success': True, 'data': bathroom.serialize()}), 200
+    data = {'bathroom': bathroom.serialize()}
+    return json.dumps({'data': data}), 200
     
 @app.route('/bathroom/<int:bathroom_id>/', methods=['POST'])
 def update_bathroom(bathroom_id):
