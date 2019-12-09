@@ -12,10 +12,8 @@ import Cosmos
 class BathroomTableViewCell: UITableViewCell {
     
     var bathroomLabel: UILabel!
-    var locationLabel: UILabel!
+    var descriptionLabel: UILabel!
     var ratingLabel: UILabel!
-    var albumArt: UIImageView!
-    var arrowImageView: UIImageView!
     lazy var cosmosView: CosmosView = {
         var view = CosmosView()
         view.settings.updateOnTouch = false
@@ -41,23 +39,14 @@ class BathroomTableViewCell: UITableViewCell {
         bathroomLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(bathroomLabel)
         
-        locationLabel = UILabel()
-        locationLabel.font = UIFont.systemFont(ofSize: 14)
-        locationLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(locationLabel)
+        descriptionLabel = UILabel()
+        descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(descriptionLabel)
         
         cosmosView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(cosmosView)
         
-        albumArt = UIImageView()
-        albumArt.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(albumArt)
-
-        
-        arrowImageView = UIImageView(image: UIImage(named: "arrow"))
-        arrowImageView.contentMode = .scaleAspectFit
-        arrowImageView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(arrowImageView)
         
         setupConstraints()
         
@@ -71,36 +60,22 @@ class BathroomTableViewCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            locationLabel.leadingAnchor.constraint(equalTo: bathroomLabel.leadingAnchor),
-            locationLabel.heightAnchor.constraint(equalToConstant: labelHeight2),
-            locationLabel.topAnchor.constraint(equalTo: bathroomLabel.bottomAnchor, constant: spacing)
+            descriptionLabel.leadingAnchor.constraint(equalTo: bathroomLabel.leadingAnchor),
+            descriptionLabel.heightAnchor.constraint(equalToConstant: labelHeight2),
+            descriptionLabel.topAnchor.constraint(equalTo: bathroomLabel.bottomAnchor, constant: spacing)
         ])
         
         NSLayoutConstraint.activate([
             cosmosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: leadPadding),
-            cosmosView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            albumArt.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: leadPaddingImage),
-            albumArt.heightAnchor.constraint(equalToConstant: albumLength),
-            albumArt.widthAnchor.constraint(equalToConstant: albumLength),
-            albumArt.topAnchor.constraint(equalTo: contentView.topAnchor, constant: albumPadding)
-        ])
-        
-        NSLayoutConstraint.activate([
-            arrowImageView.widthAnchor.constraint(equalToConstant: arrowImageLength),
-            arrowImageView.heightAnchor.constraint(equalToConstant: arrowImageLength),
-            arrowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            arrowImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            cosmosView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor)
         ])
     }
     
     func configure(for bathroom: Bathroom) {
         bathroomLabel.text = bathroom.name
-        locationLabel.text = bathroom.location
-        cosmosView.rating = bathroom.rating
-        albumArt.image = bathroom.image
+        descriptionLabel.text = bathroom.description
+        ratingLabel.text = "0"
+        cosmosView.rating = bathroom.avgRating
     }
     
     required init?(coder: NSCoder) {

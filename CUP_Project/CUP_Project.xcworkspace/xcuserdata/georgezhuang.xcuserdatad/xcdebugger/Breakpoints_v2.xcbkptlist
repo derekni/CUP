@@ -14,8 +14,8 @@
             filePath = "CUP_Project/BathroomTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "init(coder:)"
             landmarkType = "7">
             <Locations>
@@ -47,7 +47,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "14"
                   endingLineNumber = "14"
-                  offsetFromSymbolStart = "119">
+                  offsetFromSymbolStart = "113">
                </Location>
             </Locations>
          </BreakpointContent>

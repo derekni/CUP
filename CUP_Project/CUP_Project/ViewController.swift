@@ -9,6 +9,7 @@
 import UIKit
 import Cosmos
 import Alamofire
+import SwiftyJSON
 
 protocol ChangeDelegate: class {
     func changeBathroomNameText(to bathroomNameString: String)
@@ -24,9 +25,11 @@ class ViewController: UIViewController {
     var arr = [UIView]()
     let reuseIdentifier = "bathroomCellReuse"
     let cellHeight: CGFloat = 100
-    var list: [Bathroom]!
+    var bathrooms: [Bathroom]!
     var path: IndexPath?
     var cell: BathroomTableViewCell?
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,21 +44,12 @@ class ViewController: UIViewController {
 //
         //let something = AF.request("http://35.231.165.9/bathrooms/", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
         //let jsonData: JSON
-        var jsonData: Data
-        AF.request("http://35.231.165.9/bathrooms/").responseJSON{ response in
-            let jsonData = response.result as! NSDictionary
-        }
-        let decoder = JSONDecoder()
-        do {
-            let bathrooms = try decoder.decode([Bathroom].self, from: jsonData)
-            print(bathrooms)
-        } catch {
-            print(error.localizedDescription)
-        }
+        //var json: JSON
         
         
-        let b1 = Bathroom
-        list = [b1]
+        
+//        let b1 = Bathroom(name: "whhhheeee", description: "yooooo", avgRating: 1, numRatings: 8)
+//        list = [b1]
 
         // Initialize tableView
         tableView = UITableView()
@@ -64,11 +58,9 @@ class ViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(BathroomTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         view.addSubview(tableView)
-        
-        
-        
 
         setupConstraints()
+        getBathrooms()
     }
 
     func setupConstraints() {
@@ -80,23 +72,36 @@ class ViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
+    func getBathrooms() {
+        NetworkManager.getBathrooms { bathrooms in
+            self.bathrooms = bathrooms
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
 
 }
 
 /// UITableViewDataSource
 /// - Tell the table view how many rows should be in each section
 /// - Tell the table view what cell to display for each row
-extension ViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
-    }
-    
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! BathroomTableViewCell
-        let bathroom = list[indexPath.row]
-        cell.configure(for: bathroom)
-        cell.selectionStyle = .none
+        cell.configure(for: bathrooms[indexPath.row])
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return bathrooms.count
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
 }
 
@@ -104,41 +109,41 @@ extension ViewController: UITableViewDataSource {
 /// - Tell the table view what height to use for each row
 /// - Tell the table view what should happen if we select a row
 /// - Tell the table view what should happen if we deselect a row
-extension ViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        path = indexPath
+//extension ViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return cellHeight
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        path = indexPath
+//
+//        let viewController = DetailViewController(textFieldText: "text")
+//        viewController.delegate = self
+//        navigationController?.pushViewController(viewController, animated: true)
+//    }
+//}
 
-        let viewController = DetailViewController(textFieldText: "text")
-        viewController.delegate = self
-        navigationController?.pushViewController(viewController, animated: true)
-    }
-}
-
-extension ViewController: ChangeDelegate {
-    
-    func changeBathroomNameText(to bathroomNameString: String) {
-        let bathroom = list[path!.row]
-        let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
-        bathroom.setBathroomName(to: bathroomNameString)
-        cell!.configure(for: bathroom)
-    }
-    
-    func changeLocationText (to locationString: String) {
-        let bathroom = list[path!.row]
-        let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
-        bathroom.setLocation(to: locationString)
-        cell!.configure(for: bathroom)
-    }
-    
-    func changeRating(to newRating: Double) {
-        let bathroom = list[path!.row]
-        let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
-        bathroom.setRating(to: newRating)
-        cell!.configure(for: bathroom)
-    }
-    
-}
+//extension ViewController: ChangeDelegate {
+//
+////    func changeBathroomNameText(to bathroomNameString: String) {
+////        let bathroom = list[path!.row]
+////        let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
+////        bathroom.setBathroomName(to: bathroomNameString)
+////        cell!.configure(for: bathroom)
+////    }
+////
+////    func changeLocationText (to locationString: String) {
+////        let bathroom = list[path!.row]
+////        let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
+////        bathroom.setLocation(to: locationString)
+////        cell!.configure(for: bathroom)
+////    }
+////
+////    func changeRating(to newRating: Double) {
+////        let bathroom = list[path!.row]
+////        let cell = tableView.cellForRow(at: path!) as? BathroomTableViewCell
+////        bathroom.setRating(to: newRating)
+////        cell!.configure(for: bathroom)
+////    }
+//
+//}

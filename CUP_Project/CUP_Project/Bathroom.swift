@@ -9,6 +9,19 @@
 import Foundation
 import UIKit
 
+// The response we get contains a key for data, so the CourseResponse object
+// contains a variable called data. Each one of these structs must conform
+// to codable in order to be decoded from JSON.
+struct BathroomResponse: Codable {
+    var data: BathroomDataResponse
+}
+
+// The data key maps to this CourseDataResponse type. In here, there's a
+// JSON that maps "classes" to an array of courses.
+struct BathroomDataResponse: Codable {
+    var bathrooms: [Bathroom]
+}
+
 struct Bathroom: Codable{
     var name: String
     var description: String
