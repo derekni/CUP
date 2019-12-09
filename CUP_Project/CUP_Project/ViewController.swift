@@ -45,8 +45,6 @@ class ViewController: UIViewController {
         
         setupConstraints()
         getBathrooms()
-        print("bathrooms got?")
-        print(bathrooms)
     }
 
     func setupConstraints() {
@@ -67,7 +65,6 @@ class ViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }
-        print("we got the bathrooms")
     }
 
 }

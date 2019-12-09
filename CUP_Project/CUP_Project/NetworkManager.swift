@@ -30,10 +30,9 @@ class NetworkManager {
             "rating": rating
         ]
         postPoint.append(String(bathroomID))
-        print(postPoint)
+        print(parameters)
 
         AF.request(postPoint, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseData { response in
-            print(response.result)
         }
         postPoint = "http://35.231.165.9/bathroom/"
     }
