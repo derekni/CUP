@@ -8,7 +8,7 @@
 
 import UIKit
 import Cosmos
-import TinyConstraints
+import Alamofire
 
 protocol ChangeDelegate: class {
     func changeBathroomNameText(to bathroomNameString: String)
@@ -34,9 +34,28 @@ class ViewController: UIViewController {
         title = "CUP: Bathroom Locator"
         view.backgroundColor = .white
         
-        let appelSecondFloor = Bathroom(name: "Appel (Second Floor)", location: "Appel Commons", image: "insert image name here")
+//        //let parameters: [String: String] = [
+//            "name": "Appel (Second Floor)",
+//            "description": "Our very first bathroom"
+//        ]
+//
+        //let something = AF.request("http://35.231.165.9/bathrooms/", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
+        //let jsonData: JSON
+        var jsonData: Data
+        AF.request("http://35.231.165.9/bathrooms/").responseJSON{ response in
+            let jsonData = response.result as! NSDictionary
+        }
+        let decoder = JSONDecoder()
+        do {
+            let bathrooms = try decoder.decode([Bathroom].self, from: jsonData)
+            print(bathrooms)
+        } catch {
+            print(error.localizedDescription)
+        }
         
-        list = [appelSecondFloor]
+        
+        let b1 = Bathroom
+        list = [b1]
 
         // Initialize tableView
         tableView = UITableView()
