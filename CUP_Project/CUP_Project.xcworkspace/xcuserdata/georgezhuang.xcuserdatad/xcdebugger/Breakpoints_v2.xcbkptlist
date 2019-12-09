@@ -8,20 +8,18 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "F3E84BA9-CC27-4458-ABC4-5D226C9B95CE"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CUP_Project/BathroomTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "init(coder:)"
-            landmarkType = "7">
+            startingLineNumber = "86"
+            endingLineNumber = "86">
             <Locations>
                <Location
                   uuid = "F3E84BA9-CC27-4458-ABC4-5D226C9B95CE - f6aefb64d5fc9561"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "CUP_Project.BathroomTableViewCell.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;CUP_Project.BathroomTableViewCell&gt;"
@@ -36,7 +34,7 @@
                </Location>
                <Location
                   uuid = "F3E84BA9-CC27-4458-ABC4-5D226C9B95CE - bb4e329daf7e9076"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "CUP_Project.BathroomTableViewCell.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;CUP_Project.BathroomTableViewCell&gt;"
@@ -50,6 +48,22 @@
                   offsetFromSymbolStart = "113">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "772051AA-08ED-44FB-8118-798345BA76AF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CUP_Project/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "AppDelegate"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     var arr = [UIView]()
     let reuseIdentifier = "bathroomCellReuse"
     let cellHeight: CGFloat = 100
-    var bathrooms: [Bathroom]!
+    var bathrooms = [Bathroom]()
     var path: IndexPath?
     var cell: BathroomTableViewCell?
 
@@ -36,20 +36,6 @@ class ViewController: UIViewController {
 
         title = "CUP: Bathroom Locator"
         view.backgroundColor = .white
-        
-//        //let parameters: [String: String] = [
-//            "name": "Appel (Second Floor)",
-//            "description": "Our very first bathroom"
-//        ]
-//
-        //let something = AF.request("http://35.231.165.9/bathrooms/", method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
-        //let jsonData: JSON
-        //var json: JSON
-        
-        
-        
-//        let b1 = Bathroom(name: "whhhheeee", description: "yooooo", avgRating: 1, numRatings: 8)
-//        list = [b1]
 
         // Initialize tableView
         tableView = UITableView()
@@ -58,9 +44,11 @@ class ViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(BathroomTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         view.addSubview(tableView)
-
+        
         setupConstraints()
         getBathrooms()
+        print("bathrooms got?")
+        print(bathrooms)
     }
 
     func setupConstraints() {
@@ -81,6 +69,7 @@ class ViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }
+        print("we got the bathrooms")
     }
 
 }
@@ -101,27 +90,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return cellHeight
     }
+        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        path = indexPath
+    }
+        
+    let viewController = DetailViewController(textFieldText: "text")
+    viewController.delegate = self
+    navigationController?.pushViewController(viewController, animated: true)
 }
 
-/// UITableViewDelegate
-/// - Tell the table view what height to use for each row
-/// - Tell the table view what should happen if we select a row
-/// - Tell the table view what should happen if we deselect a row
-//extension ViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return cellHeight
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        path = indexPath
-//
-//        let viewController = DetailViewController(textFieldText: "text")
-//        viewController.delegate = self
-//        navigationController?.pushViewController(viewController, animated: true)
-//    }
-//}
 
 //extension ViewController: ChangeDelegate {
 //

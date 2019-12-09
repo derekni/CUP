@@ -13,7 +13,6 @@ class BathroomTableViewCell: UITableViewCell {
     
     var bathroomLabel: UILabel!
     var descriptionLabel: UILabel!
-    var ratingLabel: UILabel!
     lazy var cosmosView: CosmosView = {
         var view = CosmosView()
         view.settings.updateOnTouch = false
@@ -74,8 +73,7 @@ class BathroomTableViewCell: UITableViewCell {
     func configure(for bathroom: Bathroom) {
         bathroomLabel.text = bathroom.name
         descriptionLabel.text = bathroom.description
-        ratingLabel.text = "0"
-        cosmosView.rating = bathroom.avgRating
+        cosmosView.rating = Double(bathroom.avgRating)
     }
     
     required init?(coder: NSCoder) {
