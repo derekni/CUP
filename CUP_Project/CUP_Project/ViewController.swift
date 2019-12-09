@@ -46,6 +46,18 @@ class ViewController: UIViewController {
         setupConstraints()
         getBathrooms()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getBathrooms()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        getBathrooms()
+    }
 
     func setupConstraints() {
         // Setup the constraints for our views

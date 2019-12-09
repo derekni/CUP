@@ -29,12 +29,11 @@ class NetworkManager {
         let parameters: [String: Float] = [
             "rating": rating
         ]
-        postPoint.append(String(bathroomID))
-        print(parameters)
+        let postURL = postPoint + String(bathroomID) + "/"
+        
 
-        AF.request(postPoint, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseData { response in
+        AF.request(postURL, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<600).responseData { response in
         }
-        postPoint = "http://35.231.165.9/bathroom/"
     }
     
 }

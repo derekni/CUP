@@ -16,6 +16,7 @@ class BathroomTableViewCell: UITableViewCell {
     lazy var cosmosView: CosmosView = {
         var view = CosmosView()
         view.settings.updateOnTouch = false
+        view.settings.fillMode = .precise
         return view
     }()
     
