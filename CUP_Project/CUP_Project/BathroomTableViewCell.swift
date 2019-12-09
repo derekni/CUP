@@ -79,7 +79,6 @@ class BathroomTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             cosmosView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: leadPadding),
-            //cosmosView.heightAnchor.constraint(equalToConstant: labelHeight2),
             cosmosView.topAnchor.constraint(equalTo: locationLabel.bottomAnchor)
         ])
         
